@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>EXPERT-SIGAF — Prospection foncière Bordeaux</title>
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="preconnect" href="https://tile.openstreetmap.org">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous"/>
+<style id="leaflet-critical-css">
+/* Critical Leaflet layout rules, bundled in the file to prevent stacked/misaligned tiles. */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}
+.leaflet-container{overflow:hidden;background:#d8e0e6;outline-offset:1px;-webkit-tap-highlight-color:transparent}
+.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}
+.leaflet-tile::selection{background:transparent}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive{pointer-events:auto}
+.leaflet-container .leaflet-overlay-pane svg,.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer,.leaflet-container .leaflet-tile{max-width:none!important;max-height:none!important;width:auto;padding:0}
+.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}
+.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}
+.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}
+.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}
+.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}
+.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}
+.leaflet-fade-anim .leaflet-popup{opacity:0;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{transform-origin:0 0}.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}
+.leaflet-control-zoom,.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.35);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:30px;height:30px;line-height:30px;display:block;text-align:center;text-decoration:none;color:#172331}.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-control-attribution{padding:0 5px;color:#333;background:rgba(255,255,255,.8);font-size:10px}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover{text-decoration:underline}
+.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px;background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;min-height:1px}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;transform:rotate(45deg);background:#fff;color:#333;box-shadow:3px 3px 15px rgba(0,0,0,.4)}.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent}.leaflet-tooltip{position:absolute;padding:6px;background:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+</style>
+<style>
+:root{--navy:#091827;--navy2:#10263a;--blue:#1768e5;--line:#dce3ea;--muted:#667585;--bg:#eef2f6;--panel:#fff;--green:#32a852;--amber:#e49b14;--red:#d34b43;--shadow:0 7px 24px rgba(9,24,39,.12);--radius:12px}
+*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:#172331}button,input,select,textarea{font:inherit}.app{height:100%;display:grid;grid-template-rows:64px 1fr 28px;overflow:hidden}.top{display:flex;align-items:center;gap:18px;background:linear-gradient(90deg,var(--navy),#07131f);color:#fff;padding:0 18px;box-shadow:0 3px 15px rgba(0,0,0,.22);z-index:1000}.brand{display:flex;align-items:center;gap:10px;min-width:278px}.brandmark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#1a70ef,#0a355c);display:grid;place-items:center;font-size:19px}.brand strong{font-size:19px;letter-spacing:.2px}.brand small{display:block;color:#bdc9d4;font-size:11px}.search{position:relative;flex:1;max-width:430px}.search input{width:100%;height:39px;border:1px solid rgba(255,255,255,.08);border-radius:7px;background:#1b2b3b;color:#fff;padding:0 38px 0 14px;outline:none}.search input::placeholder{color:#aeb9c4}.search button{position:absolute;right:4px;top:4px;width:31px;height:31px;border:0;border-radius:6px;background:transparent;color:#fff;cursor:pointer}.tabs{display:flex;align-self:stretch;margin-left:auto}.tab{min-width:82px;padding:0 12px;border:0;background:transparent;color:#d9e2ea;cursor:pointer;border-bottom:3px solid transparent}.tab.active{color:#55a1ff;background:rgba(255,255,255,.05);border-bottom-color:#2585ef}.main{min-height:0;display:grid;grid-template-columns:300px minmax(420px,1fr) 320px;gap:6px;padding:7px}.panel{background:var(--panel);border:1px solid #d8e0e8;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.panel-head{height:43px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line);font-weight:700}.left,.right{min-height:0;display:flex;flex-direction:column}.scroll{padding:10px 14px;overflow:auto}.section{border-bottom:1px solid var(--line);padding:8px 0 13px}.section:last-child{border-bottom:0}.section h3{font-size:11px;letter-spacing:.45px;color:#506071;margin:4px 0 9px}.check{display:flex;align-items:center;gap:8px;font-size:13px;margin:8px 0}.check input{accent-color:var(--blue)}.range{width:100%;accent-color:var(--blue)}.basemaps{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.base{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px;font-size:11px;cursor:pointer}.base.active{border-color:var(--blue);color:var(--blue);font-weight:700}.map-wrap{position:relative;min-width:0;min-height:0;height:100%;display:grid;grid-template-rows:minmax(370px,1fr) 211px;gap:6px}.map-panel{height:auto;min-height:0;position:relative;overflow:hidden;border-radius:var(--radius)}#map{height:100%;width:100%;background:#c9d8c7}.map-status{position:absolute;z-index:710;left:12px;top:12px;background:rgba(9,24,39,.88);color:#fff;border-radius:7px;padding:7px 10px;font-size:11px;box-shadow:0 3px 12px rgba(0,0,0,.18);pointer-events:none;transition:opacity .2s}.map-status.ready{opacity:0}.map-status.error{background:rgba(160,42,35,.93)}.floating-tools{position:absolute;z-index:700;right:12px;top:12px;display:flex;gap:6px}.tool{border:1px solid #cad4de;background:#fff;border-radius:8px;padding:8px 10px;box-shadow:0 3px 12px rgba(0,0,0,.15);cursor:pointer;font-weight:600;font-size:12px}.tool.active{background:var(--blue);color:#fff}.legend{position:absolute;z-index:700;left:50%;bottom:10px;transform:translateX(-50%);background:rgba(255,255,255,.94);border:1px solid #d6dee6;border-radius:8px;padding:8px 12px;box-shadow:0 3px 12px rgba(0,0,0,.13);display:flex;align-items:center;gap:10px;font-size:11px;white-space:nowrap}.sw{width:18px;height:9px;border-radius:2px;display:inline-block}.dash{height:auto;min-height:0;display:grid;grid-template-columns:1.05fr 1.25fr 1.1fr;gap:6px;margin-top:0}.card{padding:12px 14px;overflow:hidden}.card h3{margin:0 0 9px;font-size:13px}.metric-tabs{display:flex;gap:4px;margin-bottom:9px}.pill{border:1px solid var(--line);background:#fff;border-radius:5px;padding:5px 8px;font-size:10px;cursor:pointer}.pill.active{background:var(--blue);color:#fff;border-color:var(--blue)}.ranking{font-size:11px;width:100%;border-collapse:collapse}.ranking td{padding:4px 2px;border-bottom:1px solid #edf1f4}.bar{height:6px;background:#e9eef3;border-radius:8px;overflow:hidden}.bar span{display:block;height:100%;background:var(--green)}.right .scroll{padding:0;display:flex;flex-direction:column;min-height:0}.info{padding:13px 14px;border-bottom:1px solid var(--line)}.eyebrow{font-size:11px;color:var(--muted);margin-bottom:4px}.info h2{font-size:19px;margin:0 0 9px}.score{font-size:22px;color:#f1b722;letter-spacing:1px}.kv{display:grid;grid-template-columns:1fr auto;gap:9px;font-size:12px;margin-top:12px}.good{color:#39984e}.warn{color:#d58c08}.bad{color:#c83e3b}.primary{width:100%;border:0;border-radius:6px;background:var(--blue);color:#fff;padding:10px;margin-top:13px;cursor:pointer;font-weight:700}.stats{padding:13px 14px;border-bottom:1px solid var(--line)}.stats h3,.opp h3{font-size:13px;margin:0 0 11px}.stats-grid{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:12px}.opp{padding:13px 14px;overflow:auto}.opp-row{display:grid;grid-template-columns:36px 1fr auto;gap:8px;align-items:center;border-bottom:1px solid #edf1f4;padding:8px 0;font-size:11px}.opp-icon{width:34px;height:34px;border-radius:6px;background:#edf5e8;display:grid;place-items:center;font-size:18px}.foot{background:var(--navy);color:#d7e0e8;font-size:10px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}.modal{position:fixed;inset:0;background:rgba(4,13,22,.55);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.dialog{background:#fff;width:min(560px,100%);max-height:90vh;overflow:auto;border-radius:13px;box-shadow:0 24px 80px rgba(0,0,0,.3)}.dialog-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-weight:700}.dialog-body{padding:16px 18px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}.field label{font-size:11px;color:#536273}.field input,.field select,.field textarea{border:1px solid #cfd8e1;border-radius:7px;padding:9px}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}.secondary{border:1px solid #cfd8e1;background:#fff;border-radius:6px;padding:8px 12px;cursor:pointer}.toast{position:fixed;right:18px;bottom:42px;z-index:3000;background:#14283b;color:#fff;padding:10px 14px;border-radius:8px;box-shadow:var(--shadow);display:none;font-size:12px}.toast.show{display:block}.leaflet-popup-content-wrapper{border-radius:10px}.leaflet-popup-content{margin:12px 14px}.popup-title{font-weight:800;font-size:14px}.popup-grid{display:grid;grid-template-columns:1fr auto;gap:5px;font-size:11px;margin-top:8px}.source-note{font-size:10px;line-height:1.35;color:#657585;background:#f5f7f9;padding:8px;border-radius:6px}.mobile-btn{display:none}.empty{padding:24px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:1050px){.main{grid-template-columns:260px 1fr}.right{display:none}.brand{min-width:230px}.tabs .tab:nth-child(n+4){display:none}}
+@media(max-width:760px){.app{grid-template-rows:57px 1fr 25px}.top{padding:0 9px;gap:8px}.brand{min-width:auto}.brand small,.brand strong{display:none}.search{max-width:none}.tabs{display:none}.main{display:block;padding:4px}.left{position:fixed;z-index:1500;left:4px;top:61px;bottom:29px;width:min(310px,88vw);transform:translateX(-110%);transition:.2s}.left.open{transform:none}.map-wrap{height:100%}.map-wrap{grid-template-rows:minmax(300px,1fr) 170px}.map-panel{height:auto;min-height:0}.dash{height:auto;grid-template-columns:1fr 1fr}.dash .card:nth-child(3){display:none}.mobile-btn{display:block;border:0;background:#1a70ef;color:#fff;border-radius:7px;padding:8px 10px}.legend{max-width:92%;overflow:auto}.foot span:nth-child(2){display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <button class="mobile-btn" id="menuBtn">☰</button>
+  <div class="brand"><div class="brandmark">⌁</div><div><strong>EXPERT-SIGAF</strong><small>Prospection foncière & recyclage immobilier</small></div></div>
+  <div class="search"><input id="searchInput" placeholder="Rechercher une commune ou une adresse…"><button id="searchBtn">⌕</button></div>
+  <nav class="tabs"><button class="tab">Tableau de bord</button><button class="tab active">Carte</button><button class="tab">DVF</button><button class="tab">Annonces</button><button class="tab">Opportunités</button></nav>
+</header>
+<main class="main">
+<aside class="panel left" id="leftPanel">
+  <div class="panel-head"><span>Couches & critères</span><button class="secondary" id="closeMenu">Réduire</button></div>
+  <div class="scroll">
+    <section class="section"><h3>PROSPECTION</h3>
+      <label class="check"><input id="layerCommunes" type="checkbox" checked> Communes stratégiques</label>
+      <label class="check"><input id="layerPoi" type="checkbox" checked> POI et opportunités</label>
+      <label class="check"><input id="layerDemoDvf" type="checkbox" checked> Transactions DVF importées</label>
+    </section>
+    <section class="section"><h3>INDICATEUR DE MARCHÉ</h3>
+      <label class="check"><input type="radio" name="metric" value="terrain" checked> Prix terrains à bâtir</label>
+      <label class="check"><input type="radio" name="metric" value="maison"> Prix maisons</label>
+      <label class="check"><input type="radio" name="metric" value="appartement"> Prix appartements</label>
+      <label class="check"><input type="radio" name="metric" value="score"> Potentiel global</label>
+    </section>
+    <section class="section"><h3>FILTRES</h3>
+      <label class="check">Score minimum <strong id="scoreLabel" style="margin-left:auto">3,5 / 5</strong></label><input class="range" id="scoreRange" type="range" min="2.5" max="4.5" step="0.1" value="3.5">
+      <label class="check"><input id="onlyDp" type="checkbox"> Division par DP favorable</label>
+      <label class="check"><input id="outsideBm" type="checkbox" checked> Hors Bordeaux Métropole</label>
+    </section>
+    <section class="section"><h3>URBANISME</h3>
+      <label class="check"><input id="gpuToggle" type="checkbox"> Interroger le GPU au clic</label>
+      <label class="check"><input id="cadastreToggle" type="checkbox"> Parcelles cadastrales (WMS)</label>
+      <div class="source-note">Les règles de division doivent être validées à la parcelle : zonage, accès, réseaux, stationnement, risques, servitudes et éventuel lotissement existant.</div>
+    </section>
+    <section class="section"><h3>DONNÉES</h3>
+      <button class="secondary" id="importDvf" style="width:100%;margin-bottom:7px">Importer un CSV DVF</button>
+      <input type="file" id="dvfFile" accept=".csv" hidden>
+      <button class="secondary" id="importAds" style="width:100%;margin-bottom:7px">Importer des annonces CSV</button>
+      <input type="file" id="adsFile" accept=".csv" hidden>
+      <button class="secondary" id="exportData" style="width:100%">Exporter mes POI</button>
+    </section>
+    <section class="section"><h3>FONDS DE CARTE</h3><div class="basemaps"><button class="base active" data-base="osm">Plan</button><button class="base" data-base="ortho">Satellite</button><button class="base" data-base="topo">Topo</button></div></section>
+  </div>
+</aside>
+<section class="map-wrap">
+  <div class="panel map-panel"><div id="map"></div>
+    <div class="map-status" id="mapStatus">Chargement du fond de carte…</div>
+    <div class="floating-tools"><button class="tool" id="addPoi">＋ POI</button><button class="tool" id="locate">⌖</button><button class="tool" id="fit">Vue globale</button></div>
+    <div class="legend"><b id="legendTitle">Prix terrain</b><span class="sw" style="background:#cce8c5"></span>faible <span class="sw" style="background:#8dc47d"></span>moyen <span class="sw" style="background:#f0c44b"></span>élevé <span class="sw" style="background:#dd6c43"></span>très élevé</div>
+  </div>
+  <div class="dash">
+    <div class="panel card"><h3>Prix moyen au m²</h3><div class="metric-tabs"><button class="pill active" data-cardmetric="terrain">Terrains</button><button class="pill" data-cardmetric="maison">Maisons</button><button class="pill" data-cardmetric="appartement">Appartements</button></div><table class="ranking" id="priceTable"></table></div>
+    <div class="panel card"><h3>Classement des communes</h3><table class="ranking" id="rankingTable"></table></div>
+    <div class="panel card"><h3>Répartition du portefeuille</h3><div id="portfolio" style="font-size:12px"></div></div>
+  </div>
+</section>
+<aside class="panel right">
+  <div class="panel-head"><span>Information</span><button class="secondary" id="clearInfo">×</button></div>
+  <div class="scroll"><div class="info" id="infoBox"></div><div class="stats" id="statsBox"></div><div class="opp"><h3>Annonces et opportunités</h3><div id="adsList"></div></div></div>
+</aside>
+</main>
+<footer class="foot"><span>EXPERT-SIGAF v1.2</span><span>Données : DGFiP/DVF • IGN/Géoplateforme • API Géo • OpenStreetMap</span><span>Prototype décisionnel — validation juridique requise</span></footer>
+</div>
+<div class="modal" id="poiModal"><div class="dialog"><div class="dialog-head"><span>Nouvelle opportunité</span><button class="secondary" id="closeModal">×</button></div><div class="dialog-body">
+<form id="poiForm"><div class="form-row"><div class="field"><label>Nom / référence</label><input id="poiName" required></div><div class="field"><label>Statut</label><select id="poiStatus"><option>À qualifier</option><option>À contacter</option><option>Visite prévue</option><option>Étude en cours</option><option>Offre déposée</option></select></div></div>
+<div class="form-row"><div class="field"><label>Prix affiché (€)</label><input id="poiPrice" type="number"></div><div class="field"><label>Surface terrain (m²)</label><input id="poiArea" type="number"></div></div>
+<div class="field"><label>Commentaire</label><textarea id="poiComment" rows="4" placeholder="Bâti dégradé, accès, réseaux, potentiel de détachement…"></textarea></div>
+<div class="field"><label>Photo</label><input id="poiPhoto" type="file" accept="image/*"></div>
+<div class="actions"><button type="button" class="secondary" id="cancelPoi">Annuler</button><button class="primary" style="width:auto;margin:0" type="submit">Enregistrer</button></div></form></div></div></div>
+<div class="toast" id="toast"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>if(!window.L){document.write('<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"><\/script>')}</script>
+<script>
+if(!window.L){
+  document.getElementById('map').innerHTML='<div style="height:100%;display:grid;place-items:center;padding:24px;text-align:center;background:#dfe7ec;color:#263746"><div><b>Le moteur cartographique n’a pas pu être chargé.</b><br><small>Vérifiez la connexion Internet, puis rechargez la page.</small></div></div>';
+  throw new Error('Leaflet indisponible');
+}
+const COMMUNES=[
+ {code:'33192',nom:'Fargues-Saint-Hilaire',lat:44.824,lon:-0.444,zone:'Entre-deux-Mers',score:4.35,dp:true,terrain:215,maison:3220,appartement:3850,volume:92,delai:58,comment:'Forte proximité bordelaise, marché d’accession soutenu, foncier rare : ciblage opportuniste.'},
+ {code:'33535',nom:'Tresses',lat:44.848,lon:-0.463,zone:'Entre-deux-Mers',score:4.20,dp:true,terrain:205,maison:3150,appartement:3760,volume:104,delai:61,comment:'Demande résidentielle élevée et bonnes sorties, mais prix d’entrée exigeants.'},
+ {code:'33140',nom:'Créon',lat:44.775,lon:-0.348,zone:'Créonnais',score:4.18,dp:true,terrain:172,maison:2680,appartement:3280,volume:174,delai:69,comment:'Centralité, services et bassin d’accession. Bon équilibre entre liquidité et prix d’entrée.'},
+ {code:'33341',nom:'Sadirac',lat:44.782,lon:-0.409,zone:'Créonnais',score:4.08,dp:true,terrain:178,maison:2740,appartement:3190,volume:136,delai:72,comment:'Grandes parcelles et proximité de Créon. Vigilance sur assainissement, accès et dispersion du bâti.'},
+ {code:'33482',nom:'Saint-André-de-Cubzac',lat:44.994,lon:-0.444,zone:'Cubzaguais',score:4.12,dp:true,terrain:165,maison:2530,appartement:3030,volume:268,delai:64,comment:'Marché profond, gare et services. Adapté à une montée en cadence maîtrisée.'},
+ {code:'33482X',nom:'Saint-Quentin-de-Baron',lat:44.819,lon:-0.286,zone:'Libournais',score:3.98,dp:true,terrain:148,maison:2440,appartement:2890,volume:91,delai:76,comment:'Prix d’entrée plus accessibles et potentiel de grandes parcelles. Liquidité à vérifier micro-secteur par micro-secteur.'},
+ {code:'33327',nom:'Podensac',lat:44.651,lon:-0.355,zone:'Graves',score:3.95,dp:true,terrain:150,maison:2360,appartement:2850,volume:118,delai:72,comment:'Gare et axe A62. Intérêt pour bâti ancien et parcelles divisibles proches des services.'},
+ {code:'33352',nom:'La Réole',lat:44.582,lon:-0.040,zone:'Sud Gironde',score:3.42,dp:false,terrain:92,maison:1640,appartement:2010,volume:132,delai:104,comment:'Prix d’acquisition bas et recyclage du bâti, mais commercialisation plus lente et marché plus étroit.'},
+ {code:'33227',nom:'Langon',lat:44.554,lon:-0.249,zone:'Sud Gironde',score:3.88,dp:true,terrain:142,maison:2240,appartement:2750,volume:219,delai:70,comment:'Pôle de services robuste, marché plus liquide que son hinterland.'},
+ {code:'33433',nom:'Saint-Loubès',lat:44.917,lon:-0.428,zone:'Rive droite',score:3.92,dp:true,terrain:210,maison:2970,appartement:3480,volume:178,delai:60,comment:'Très bon marché de sortie mais concurrence forte et marges sensibles au prix d’achat.'},
+ {code:'33213',nom:'La Brède',lat:44.682,lon:-0.528,zone:'Montesquieu',score:3.76,dp:true,terrain:245,maison:3420,appartement:3950,volume:107,delai:57,comment:'Marché premium, à réserver aux opérations très sécurisées ou à forte valeur ajoutée.'},
+ {code:'33042',nom:'Bazas',lat:44.432,lon:-0.212,zone:'Sud Gironde',score:3.55,dp:false,terrain:110,maison:1950,appartement:2310,volume:92,delai:93,comment:'Potentiel de recyclage patrimonial mais vitesse de sortie plus faible.'}
+];
+const sampleAds=[
+ {commune:'Créon',type:'Maison avec terrain',surface:1650,price:298000,url:'https://www.google.com/search?q=maison+terrain+Creon+vente',demo:true},
+ {commune:'Sadirac',type:'Maison à rénover',surface:2100,price:275000,url:'https://www.google.com/search?q=maison+a+renover+Sadirac+vente',demo:true},
+ {commune:'Saint-André-de-Cubzac',type:'Terrain + bâti',surface:1450,price:249000,url:'https://www.google.com/search?q=terrain+maison+Saint-Andre-de-Cubzac+vente',demo:true},
+ {commune:'Podensac',type:'Maison ancienne',surface:1850,price:220000,url:'https://www.google.com/search?q=maison+terrain+Podensac+vente',demo:true}
+];
+let ads=[...sampleAds],metric='terrain',cardMetric='terrain',pendingLatLng=null,communeLayer=null,poiLayer=null,dvfLayer=null,cadastreLayer=null,selected=null;
+const mapPinSvg=`<svg xmlns='http://www.w3.org/2000/svg' width='30' height='42' viewBox='0 0 30 42'><path fill='%231768e5' stroke='white' stroke-width='2' d='M15 1C7.3 1 1 7.3 1 15c0 10.6 14 25 14 25s14-14.4 14-25C29 7.3 22.7 1 15 1z'/><circle cx='15' cy='15' r='5.5' fill='white'/></svg>`;
+const mapPinUrl='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(mapPinSvg);
+L.Icon.Default.mergeOptions({iconUrl:mapPinUrl,iconRetinaUrl:mapPinUrl,shadowUrl:'',iconSize:[30,42],iconAnchor:[15,41],popupAnchor:[0,-36]});
+const map=L.map('map',{zoomControl:true,preferCanvas:true,zoomAnimation:false,fadeAnimation:false,markerZoomAnimation:false}).setView([44.80,-0.42],10);
+map.createPane('basemapPane');map.getPane('basemapPane').style.zIndex='200';
+map.createPane('rasterOverlayPane');map.getPane('rasterOverlayPane').style.zIndex='350';map.getPane('rasterOverlayPane').style.pointerEvents='none';
+const commonTileOptions={pane:'basemapPane',tileSize:256,updateWhenIdle:true,updateWhenZooming:false,keepBuffer:2,noWrap:true,detectRetina:false};
+const bases={
+ osm:L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{...commonTileOptions,maxZoom:19,attribution:'© OpenStreetMap contributors'}),
+ ortho:L.tileLayer('https://data.geopf.fr/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',{...commonTileOptions,maxZoom:19,attribution:'IGN · Géoplateforme'}),
+ topo:L.tileLayer('https://data.geopf.fr/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&FORMAT=image/png&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',{...commonTileOptions,maxZoom:18,attribution:'IGN · Plan IGN'})
+};
+let activeBase=null,activeBaseKey='',tileErrors={osm:0,ortho:0,topo:0};
+function setMapStatus(text,state='loading'){const el=document.getElementById('mapStatus');if(!el)return;el.textContent=text;el.classList.toggle('ready',state==='ready');el.classList.toggle('error',state==='error')}
+function activateBase(key,notify=false){
+  const next=bases[key];if(!next||activeBase===next)return;
+  if(activeBase){map.removeLayer(activeBase)}
+  const pane=map.getPane('basemapPane');if(pane)pane.replaceChildren();
+  activeBase=next;activeBaseKey=key;tileErrors[key]=0;setMapStatus('Chargement du fond de carte…');
+  next.addTo(map);
+  requestAnimationFrame(()=>map.invalidateSize({pan:false,animate:false}));
+  if(notify)toast(key==='osm'?'Fond Plan activé':key==='ortho'?'Fond Satellite activé':'Fond Topographique activé');
+}
+Object.entries(bases).forEach(([key,layer])=>{
+  layer.on('load',()=>{if(activeBase===layer)setMapStatus('', 'ready')});
+  layer.on('tileerror',()=>{if(activeBase!==layer)return;tileErrors[key]=(tileErrors[key]||0)+1;if(tileErrors[key]===5){
+    if(key!=='osm'){toast('Fond IGN indisponible : retour automatique au fond Plan');activateBase('osm')}
+    else setMapStatus('Tuiles indisponibles — vérifiez la connexion', 'error');
+  }});
+});
+activateBase('osm');
+poiLayer=L.layerGroup().addTo(map);dvfLayer=L.layerGroup().addTo(map);
+function colorFor(v,key){if(key==='score')return v>=4.15?'#4c9f55':v>=3.9?'#8cbd62':v>=3.6?'#e4bc47':'#d56a4e';const cuts=key==='terrain'?[130,170,210]:key==='maison'?[2100,2700,3200]:[2600,3200,3800];return v<cuts[0]?'#cce8c5':v<cuts[1]?'#8dc47d':v<cuts[2]?'#f0c44b':'#dd6c43'}
+function filters(c){return c.score>=+document.getElementById('scoreRange').value&&(!document.getElementById('onlyDp').checked||c.dp)}
+function createFallbackCommune(c,group){
+  const circle=L.circle([c.lat,c.lon],{radius:3200,color:'#ffffff',weight:1.4,fillColor:colorFor(c[metric],metric),fillOpacity:.62});
+  circle.on('click',()=>selectCommune(c,circle));
+  circle.on('mouseover',()=>circle.setStyle({weight:3}));
+  circle.on('mouseout',()=>circle.setStyle({weight:1.4}));
+  circle.bindTooltip(`<b>${c.nom}</b><br>Score ${c.score.toFixed(2)}/5`);
+  circle.addTo(group);
+  return circle;
+}
+async function enrichCommuneBoundary(c,group,fallback){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),4500);
+  try{
+    const res=await fetch(`https://geo.api.gouv.fr/communes?nom=${encodeURIComponent(c.nom)}&fields=nom,code,contour,centre&format=geojson&geometry=contour`,{signal:controller.signal});
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const gj=await res.json();
+    const features=gj.features||[];
+    const f=features.find(x=>normalizeText(x.properties?.nom)===normalizeText(c.nom))||features[0];
+    if(!f) return;
+    if(group.hasLayer(fallback)) group.removeLayer(fallback);
+    L.geoJSON(f,{style:{color:'#ffffff',weight:1.4,fillColor:colorFor(c[metric],metric),fillOpacity:.62},onEachFeature:(_,layer)=>{
+      layer.on('click',()=>selectCommune(c,layer));
+      layer.on('mouseover',()=>layer.setStyle({weight:3}));
+      layer.on('mouseout',()=>layer.setStyle({weight:1.4}));
+      layer.bindTooltip(`<b>${c.nom}</b><br>Score ${c.score.toFixed(2)}/5`);
+    }}).addTo(group);
+  }catch(e){console.warn('Contour communal indisponible',c.nom,e.message)}finally{clearTimeout(timer)}
+}
+function loadCommunes(){
+  if(communeLayer) map.removeLayer(communeLayer);
+  const group=L.featureGroup().addTo(map);
+  communeLayer=group;
+  const visible=COMMUNES.filter(filters);
+  visible.forEach(c=>{
+    const fallback=createFallbackCommune(c,group);
+    enrichCommuneBoundary(c,group,fallback);
+  });
+  updateDash();
+}
+function selectCommune(c,layer){selected=c;if(layer&&layer.getBounds)map.fitBounds(layer.getBounds(),{padding:[30,30],maxZoom:13});else map.setView([c.lat,c.lon],13);renderInfo(c);renderAds(c.nom);if(document.getElementById('gpuToggle').checked)queryGpu(c)}
+function renderInfo(c){document.getElementById('infoBox').innerHTML=`<div class="eyebrow">Commune cible · ${c.zone}</div><h2>${c.nom}</h2><div><span class="score">${'★'.repeat(Math.round(c.score))}${'☆'.repeat(5-Math.round(c.score))}</span> <b>${c.score.toFixed(2)} / 5</b></div><div class="kv"><span>Attractivité marché</span><b class="good">${c.score>=4?'Élevée':'Modérée'}</b><span>Division parcellaire</span><b class="${c.dp?'good':'warn'}">${c.dp?'Potentiellement DP':'À expertiser'}</b><span>Positionnement</span><b>${c.score>=4.1?'Prioritaire':c.score>=3.8?'Sélectif':'Opportuniste'}</b></div><button class="primary" onclick="openCommuneLinks('${c.nom}')">Ouvrir les recherches marché</button>`;
+document.getElementById('statsBox').innerHTML=`<h3>Indicateurs de présélection</h3><div class="stats-grid"><span>Terrain à bâtir</span><b>${c.terrain.toLocaleString('fr-FR')} €/m²</b><span>Maison</span><b>${c.maison.toLocaleString('fr-FR')} €/m²</b><span>Appartement</span><b>${c.appartement.toLocaleString('fr-FR')} €/m²</b><span>Volume indicatif</span><b>${c.volume}</b><span>Délai de vente indicatif</span><b>${c.delai} jours</b></div><p style="font-size:11px;line-height:1.4;color:#5e6d7c">${c.comment}</p><div class="source-note">Valeurs de travail issues de l’étude stratégique. À recalculer avec le millésime DVF importé et à contrôler auprès des professionnels locaux.</div>`}
+window.openCommuneLinks=(n)=>window.open(`https://www.google.com/search?q=${encodeURIComponent('immobilier terrain maison à rénover '+n+' vente')}`,'_blank');
+function renderAds(commune){const rows=ads.filter(a=>!commune||a.commune.toLowerCase().includes(commune.toLowerCase()));document.getElementById('adsList').innerHTML=rows.length?rows.map(a=>`<div class="opp-row"><div class="opp-icon">⌂</div><div><b>${a.type}</b><br>${a.commune} · ${Number(a.surface||0).toLocaleString('fr-FR')} m²${a.demo?' · exemple':''}</div><div style="text-align:right"><b>${Number(a.price||0).toLocaleString('fr-FR')} €</b><br><a href="${a.url||'#'}" target="_blank">ouvrir</a></div></div>`).join(''):'<div class="empty">Aucune annonce importée pour cette commune.</div>'}
+function updateDash(){const list=COMMUNES.filter(filters).sort((a,b)=>b.score-a.score);document.getElementById('priceTable').innerHTML=list.slice(0,6).map(c=>`<tr><td>${c.nom}</td><td style="text-align:right"><b>${c[cardMetric].toLocaleString('fr-FR')} €/m²</b></td></tr>`).join('');document.getElementById('rankingTable').innerHTML=list.slice(0,6).map((c,i)=>`<tr><td>${i+1}</td><td>${c.nom}<div class="bar"><span style="width:${c.score/5*100}%"></span></div></td><td><b>${c.score.toFixed(2)}</b></td></tr>`).join('');const pois=getPois();let counts={qualifier:0,contact:0,etude:0,offre:0};pois.forEach(p=>{if(p.status.includes('qualifier'))counts.qualifier++;else if(p.status.includes('contacter'))counts.contact++;else if(p.status.includes('Offre'))counts.offre++;else counts.etude++});document.getElementById('portfolio').innerHTML=`<div class="kv"><span>Communes visibles</span><b>${list.length}</b><span>POI enregistrés</span><b>${pois.length}</b><span>Annonces chargées</span><b>${ads.length}</b><span>Score moyen</span><b>${(list.reduce((s,c)=>s+c.score,0)/(list.length||1)).toFixed(2)}</b></div><div class="source-note" style="margin-top:13px">Les annonces d’exemple ne constituent pas un flux redistribué. Importez un CSV provenant d’une source autorisée ou utilisez les liens de recherche.</div>`}
+function getPois(){return JSON.parse(localStorage.getItem('expertSigafPois')||'[]')}
+function savePois(x){localStorage.setItem('expertSigafPois',JSON.stringify(x))}
+function drawPois(){poiLayer.clearLayers();getPois().forEach((p,i)=>{const m=L.marker([p.lat,p.lon]).addTo(poiLayer);m.bindPopup(`<div class="popup-title">${p.name}</div><div class="popup-grid"><span>Statut</span><b>${p.status}</b><span>Prix</span><b>${(+p.price||0).toLocaleString('fr-FR')} €</b><span>Terrain</span><b>${(+p.area||0).toLocaleString('fr-FR')} m²</b></div><p style="font-size:11px">${p.comment||''}</p>${p.photo?`<img src="${p.photo}" style="max-width:220px;border-radius:6px">`:''}<button onclick="deletePoi(${i})" class="secondary">Supprimer</button>`)});updateDash()}
+window.deletePoi=i=>{let p=getPois();p.splice(i,1);savePois(p);drawPois();toast('POI supprimé')};
+async function queryGpu(c){try{const geom=encodeURIComponent(JSON.stringify({type:'Point',coordinates:[c.lon,c.lat]}));const r=await fetch(`https://apicarto.ign.fr/api/gpu/zone-urba?geom=${geom}`);const j=await r.json();const n=j.features?.length||0;toast(`${n} zone(s) GPU trouvée(s) au centre de ${c.nom}`)}catch(e){toast('Service GPU indisponible ou bloqué par le navigateur')}}
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600)}
+function parseCSV(txt){const lines=txt.trim().split(/\r?\n/);const sep=lines[0].includes(';')?';':',';const h=lines[0].split(sep).map(x=>x.trim().toLowerCase());return lines.slice(1).map(l=>{const v=l.split(sep);return Object.fromEntries(h.map((k,i)=>[k,(v[i]||'').trim()]))})}
+function importDvf(file){const fr=new FileReader();fr.onload=()=>{const rows=parseCSV(fr.result);dvfLayer.clearLayers();let n=0;rows.slice(0,3000).forEach(r=>{const lat=+(r.latitude||r.lat),lon=+(r.longitude||r.lon),price=+(r.valeur_fonciere||r.prix||0),surf=+(r.surface_reelle_bati||r.surface||0);if(lat&&lon){L.circleMarker([lat,lon],{radius:4,color:'#1559aa',weight:1,fillOpacity:.55}).bindPopup(`<b>Transaction DVF</b><br>${price.toLocaleString('fr-FR')} €<br>${surf} m²`).addTo(dvfLayer);n++}});toast(`${n} transactions DVF cartographiées`)};fr.readAsText(file,'utf-8')}
+function importAds(file){const fr=new FileReader();fr.onload=()=>{ads=parseCSV(fr.result).map(r=>({commune:r.commune||'',type:r.type||r.titre||'Annonce',surface:+(r.surface||0),price:+(r.prix||r.price||0),url:r.url||r.lien||'#'}));renderAds(selected?.nom);updateDash();toast(`${ads.length} annonces importées`)};fr.readAsText(file,'utf-8')}
+function openPoi(latlng){pendingLatLng=latlng;document.getElementById('poiModal').classList.add('open');document.getElementById('poiName').focus()}
+let addMode=false;document.getElementById('addPoi').onclick=()=>{addMode=!addMode;document.getElementById('addPoi').classList.toggle('active',addMode);map.getContainer().style.cursor=addMode?'crosshair':'';toast(addMode?'Cliquez sur la carte pour placer le POI':'Mode POI désactivé')};map.on('click',e=>{if(addMode){openPoi(e.latlng);addMode=false;document.getElementById('addPoi').classList.remove('active');map.getContainer().style.cursor=''}});
+document.getElementById('poiForm').onsubmit=e=>{e.preventDefault();const f=document.getElementById('poiPhoto').files[0];const done=photo=>{let p=getPois();p.push({lat:pendingLatLng.lat,lon:pendingLatLng.lng,name:document.getElementById('poiName').value,status:document.getElementById('poiStatus').value,price:document.getElementById('poiPrice').value,area:document.getElementById('poiArea').value,comment:document.getElementById('poiComment').value,photo});savePois(p);drawPois();document.getElementById('poiModal').classList.remove('open');e.target.reset();toast('Opportunité enregistrée')};if(f){const r=new FileReader();r.onload=()=>done(r.result);r.readAsDataURL(f)}else done('')};
+['closeModal','cancelPoi'].forEach(id=>document.getElementById(id).onclick=()=>document.getElementById('poiModal').classList.remove('open'));
+document.getElementById('scoreRange').oninput=e=>{document.getElementById('scoreLabel').textContent=Number(e.target.value).toFixed(1).replace('.',',')+' / 5';loadCommunes()};document.getElementById('onlyDp').onchange=loadCommunes;document.querySelectorAll('input[name=metric]').forEach(x=>x.onchange=e=>{metric=e.target.value;document.getElementById('legendTitle').textContent=metric==='score'?'Potentiel global':'Prix '+metric;loadCommunes()});document.querySelectorAll('[data-cardmetric]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-cardmetric]').forEach(x=>x.classList.remove('active'));b.classList.add('active');cardMetric=b.dataset.cardmetric;updateDash()});
+document.querySelectorAll('[data-base]').forEach(b=>b.onclick=()=>{activateBase(b.dataset.base,true);document.querySelectorAll('[data-base]').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+document.getElementById('layerCommunes').onchange=e=>e.target.checked?communeLayer?.addTo(map):communeLayer&&map.removeLayer(communeLayer);document.getElementById('layerPoi').onchange=e=>e.target.checked?poiLayer.addTo(map):map.removeLayer(poiLayer);document.getElementById('layerDemoDvf').onchange=e=>e.target.checked?dvfLayer.addTo(map):map.removeLayer(dvfLayer);
+document.getElementById('cadastreToggle').onchange=e=>{if(e.target.checked){cadastreLayer=L.tileLayer.wms('https://data.geopf.fr/wms-v/ows',{layers:'CADASTRALPARCELS.PARCELLAIRE_EXPRESS',format:'image/png',transparent:true,opacity:.7,pane:'rasterOverlayPane',zIndex:350});cadastreLayer.addTo(map)}else if(cadastreLayer)map.removeLayer(cadastreLayer)};
+document.getElementById('importDvf').onclick=()=>document.getElementById('dvfFile').click();document.getElementById('dvfFile').onchange=e=>e.target.files[0]&&importDvf(e.target.files[0]);document.getElementById('importAds').onclick=()=>document.getElementById('adsFile').click();document.getElementById('adsFile').onchange=e=>e.target.files[0]&&importAds(e.target.files[0]);document.getElementById('exportData').onclick=()=>{const blob=new Blob([JSON.stringify(getPois(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='expert_sigaf_opportunites.json';a.click();URL.revokeObjectURL(a.href)};
+document.getElementById('locate').onclick=()=>map.locate({setView:true,maxZoom:15});map.on('locationfound',e=>L.circleMarker(e.latlng,{radius:8,color:'#1768e5',fillOpacity:.8}).addTo(map).bindPopup('Votre position').openPopup());document.getElementById('fit').onclick=()=>communeLayer&&map.fitBounds(communeLayer.getBounds(),{padding:[15,15]});
+const searchLayer=L.layerGroup().addTo(map);
+function normalizeText(v){return (v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim()}
+async function geocodeAddress(q){
+  const endpoints=[
+    `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(q)}&limit=5`,
+    `https://nominatim.openstreetmap.org/search?format=geojson&countrycodes=fr&limit=5&q=${encodeURIComponent(q)}`
+  ];
+  for(const url of endpoints){
+    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),6000);
+    try{const r=await fetch(url,{signal:controller.signal,headers:{'Accept':'application/json'}});if(!r.ok)continue;const j=await r.json();if(j.features?.length)return j.features[0]}catch(e){console.warn('Géocodage indisponible',url,e.message)}finally{clearTimeout(timer)}
+  }
+  return null;
+}
+async function search(){
+  const input=document.getElementById('searchInput');
+  const q=input.value.trim();if(!q){toast('Saisissez une commune ou une adresse');return}
+  const nq=normalizeText(q);
+  const local=COMMUNES.find(c=>normalizeText(c.nom).includes(nq)||nq.includes(normalizeText(c.nom)));
+  if(local){selectCommune(local);toast(`${local.nom} sélectionnée`);return}
+  const btn=document.getElementById('searchBtn');btn.disabled=true;btn.textContent='…';
+  try{
+    const f=await geocodeAddress(q);
+    if(!f){toast('Aucun résultat trouvé');return}
+    const coords=f.geometry.coordinates;const lat=coords[1],lon=coords[0];
+    searchLayer.clearLayers();
+    map.setView([lat,lon],16);
+    L.marker([lat,lon]).addTo(searchLayer).bindPopup(f.properties?.label||f.properties?.display_name||q).openPopup();
+  }finally{btn.disabled=false;btn.textContent='⌕'}
+}
+document.getElementById('searchBtn').onclick=search;document.getElementById('searchInput').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();search()}};
+document.getElementById('clearInfo').onclick=()=>{selected=null;document.getElementById('infoBox').innerHTML='<div class="empty">Sélectionnez une commune sur la carte.</div>';document.getElementById('statsBox').innerHTML='';renderAds()};document.getElementById('menuBtn').onclick=()=>document.getElementById('leftPanel').classList.toggle('open');document.getElementById('closeMenu').onclick=()=>document.getElementById('leftPanel').classList.remove('open');
+const mapElement=document.getElementById('map');
+if(window.ResizeObserver){new ResizeObserver(()=>map.invalidateSize({pan:false,animate:false})).observe(mapElement)}
+window.addEventListener('load',()=>{setTimeout(()=>map.invalidateSize({pan:false,animate:false}),80);setTimeout(()=>map.invalidateSize({pan:false,animate:false}),500)});
+window.addEventListener('resize',()=>map.invalidateSize({pan:false,animate:false}));
+renderAds();drawPois();loadCommunes();selectCommune(COMMUNES[2]);
+</script>
+</body></html>
